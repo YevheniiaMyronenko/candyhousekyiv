@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Каталог — Магазин солодощів</title>
 
-  <!-- Основні стилі сайту -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Стилі ТІЛЬКИ для каталогу -->
   <style>
     .products-grid {
       display: grid;
@@ -50,6 +48,18 @@
       font-size: 0.9rem;
       color: #555;
     }
+
+    .search-box {
+      margin: 20px 0;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
   </style>
 </head>
 
@@ -73,7 +83,12 @@
     <h1>Каталог товарів</h1>
     <p>Виберіть солодощі та напишіть нам для уточнення наявності.</p>
 
-    <!-- ГАЛЕРЕЯ ТОВАРІВ -->
+    <!-- 🔍 ПОШУК -->
+    <div class="search-box">
+      <input id="searchInput" type="text" placeholder="Пошук за назвою товару">
+    </div>
+
+    <!-- ТОВАРИ -->
     <div class="products-grid">
 
       <div class="product-card">
@@ -109,26 +124,25 @@
       <div class="product-card">
         <img src="images/neon.jpg" alt="Цукерки Карамель неон">
         <h2>Цукерки Карамель неон</h2>
-        <p>Фруктові льодяники. Смаки: чорниця, виноград, полуниця, лимон, апельсин, яблуко.</p>
+        <p>Фруктові льодяники.</p>
       </div>
 
       <div class="product-card">
         <img src="images/fruit.jpg" alt="Фруктові цукерки">
         <h2>Фруктові цукерки</h2>
-        <p>Смаки: кола, апельсин, лимон, виноград, персик, чорниця, полуниця.</p>
+        <p>Смаки: кола, апельсин, лимон.</p>
       </div>
 
       <div class="product-card">
         <img src="images/frut.jpg" alt="Фруктові цукерки асорті">
         <h2>Фруктові цукерки асорті</h2>
-        <p>Смаки: лимон, маракуя, персик, чорниця, полуниця, кавун.</p>
+        <p>Смаки: лимон, маракуя, кавун.</p>
       </div>
 
     </div>
 
     <p class="muted" style="margin-top: 25px;">
-      Примітка: для уточнення наявності напишіть нам у Viber, Telegram або Instagram,
-      надіславши фото чи назву товару.
+      Примітка: для уточнення наявності напишіть нам у Viber, Telegram або Instagram.
     </p>
   </section>
 </main>
@@ -138,6 +152,21 @@
     <p>© 2026 Магазин солодощів</p>
   </div>
 </footer>
+
+<!-- 🧠 JS ПОШУК -->
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.product-card');
+
+  searchInput.addEventListener('input', function () {
+    const value = this.value.toLowerCase();
+
+    cards.forEach(card => {
+      const title = card.querySelector('h2').textContent.toLowerCase();
+      card.style.display = title.includes(value) ? 'flex' : 'none';
+    });
+  });
+</script>
 
 </body>
 </html>
